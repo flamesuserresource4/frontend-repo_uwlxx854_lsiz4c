@@ -7,25 +7,24 @@ import FacultyDashboard from './components/FacultyDashboard'
 import CashierDashboard from './components/CashierDashboard'
 
 function App() {
-  const [role, setRole] = useState('student')
   const [user, setUser] = useState(null)
 
   useEffect(()=>{
-    // default demo user
     setUser(null)
   }, [])
 
   const onLogin = (u) => {
     setUser(u)
-    setRole(u.role)
   }
 
   const onLogout = () => {
     setUser(null)
   }
 
+  const role = user?.role
+
   return (
-    <Layout onRoleChange={setRole} currentRole={role} user={user} onLogout={onLogout}>
+    <Layout user={user} onLogout={onLogout}>
       {!user ? (
         <div className="flex items-center justify-center min-h-[60vh]">
           <Login onLogin={onLogin} />
